@@ -10,7 +10,7 @@ CREATE TABLE Team(
 );
 GO
 
-CREATE TABLE Test_Team_Stats(
+CREATE TABLE Team_Stats(
     team_league_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
 	league_pos int NOT NULL,
