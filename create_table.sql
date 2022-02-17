@@ -1,0 +1,13 @@
+CREATE TABLE Test_Matches (
+	match_id int PRIMARY KEY,
+	home_team_id int FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
+	away_team_id int FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
+	league_id int NOT NULL,
+	season int NOT NULL CHECK (season > 1850 AND season < 2100),
+	date_time datetime NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'), -- YYYY-MM-DD hh:mm:ss[.nnn]
+	stadium varchar(128),
+	home_goals tinyint NOT NULL, -- 1 Byte [0, 255]
+	away_goals tinyint NOT NULL,
+	referee varchar(64),
+	logo_url varchar(256)
+)
