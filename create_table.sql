@@ -12,5 +12,5 @@ CREATE TABLE [dbo].[Matches] (
 	[logo_url] [varchar](256),
 	CONSTRAINT [match_pk] PRIMARY KEY (match_id, home_team_id, away_team_id),
 	CONSTRAINT [match_u] UNIQUE (match_id),
-)
-GO;
+);
+GO
