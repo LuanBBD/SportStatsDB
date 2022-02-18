@@ -11,40 +11,40 @@ GO
 
 
 CREATE TABLE [dbo].[Country](
-	[CountryID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](100) NOT NULL,
+	[country_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](100) NOT NULL,
 	[flag] [varchar](200) NULL,
-	CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+	CONSTRAINT [pk_country] PRIMARY KEY CLUSTERED 
 	(
-		[CountryID] ASC
+		[country_id] ASC
 	)
 );
 GO
 
 CREATE TABLE [dbo].[League](
-	[LeagueID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](50) NOT NULL,
-	[CountryID] [int] FOREIGN KEY REFERENCES Country(CountryID) NOT NULL,
-	[Logo] [varchar](200) NULL,
-	CONSTRAINT [PK_League] PRIMARY KEY CLUSTERED 
+	[league_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[country_id] [int] FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
+	[logo] [varchar](200) NULL,
+	CONSTRAINT [pk_league] PRIMARY KEY CLUSTERED 
 	(
-		[LeagueID] ASC
+		[league_id] ASC
 	)
 );
 GO
 
 CREATE TABLE [dbo].[Position](
-	[PositionID] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](50) NOT NULL,
-	CONSTRAINT [PK_Position] PRIMARY KEY CLUSTERED 
+	[position_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	CONSTRAINT [pk_position] PRIMARY KEY CLUSTERED 
 	(
-		[PositionID] ASC
+		[position_id] ASC
 	)
 );
 GO
 
 INSERT INTO [dbo].[Country]
-           ([Name]
+           ([name]
            ,[flag]         
            )
 VALUES	('England','https://media.api-sports.io/flags/gb.svg'),
@@ -54,9 +54,9 @@ VALUES	('England','https://media.api-sports.io/flags/gb.svg'),
 GO
 
 INSERT INTO [dbo].[League]
-           ([Name]
-           ,[CountryID]
-           ,[Logo]
+           ([name]
+           ,[country_id]
+           ,[logo]
            )
 VALUES	('Premier League',1,'https://media.api-sports.io/football/leagues/39.png'),
 		('La Liga',2, 'https://media.api-sports.io/football/leagues/140.png'),
@@ -65,7 +65,7 @@ VALUES	('Premier League',1,'https://media.api-sports.io/football/leagues/39.png'
 GO
 
 INSERT INTO [dbo].[Position]
-           ([Name]   
+           ([name]   
            )
 VALUES	('Goalkeeper'),
 		('Defender'),
