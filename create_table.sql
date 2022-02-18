@@ -1,5 +1,5 @@
-CREATE TABLE Test_Matches (
-	match_id int PRIMARY KEY,
+CREATE TABLE Matches (
+	match_id int NOT NULL,
 	home_team_id int FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
 	away_team_id int FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
 	league_id int NOT NULL,
@@ -9,5 +9,8 @@ CREATE TABLE Test_Matches (
 	home_goals tinyint NOT NULL, -- 1 Byte [0, 255]
 	away_goals tinyint NOT NULL,
 	referee varchar(64),
-	logo_url varchar(256)
+	logo_url varchar(256),
+	CONSTRAINT match_pk PRIMARY KEY (match_id, home_team_id, away_team_id),
+	CONSTRAINT match_u UNIQUE (match_id),
 )
+GO;
