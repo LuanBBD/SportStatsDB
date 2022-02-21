@@ -20,11 +20,34 @@ GO
 -- ADD CONSTRAINT [pk_manager] PRIMARY KEY CLUSTERED ([manager_id]);
 -- GO
 
+CREATE TABLE [dbo].[Country](
+	[country_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](100) NOT NULL,
+	[flag] [varchar](200) NULL,
+	CONSTRAINT [pk_country] PRIMARY KEY CLUSTERED 
+	(
+		[country_id] ASC
+	)
+);
+GO
+
+CREATE TABLE [dbo].[League](
+	[league_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[country_id] [int] FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
+	[logo] [varchar](200) NULL,
+	CONSTRAINT [pk_league] PRIMARY KEY CLUSTERED 
+	(
+		[league_id] ASC
+	)
+);
+GO
+
 CREATE TABLE Team(
     team_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	manager_id int FOREIGN KEY REFERENCES Manager(manager_id) NOT NULL,
 	league_id int FOREIGN KEY REFERENCES League(league_id) NOT NULL,
-	stadium_id int FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
+	-- stadium_id int FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
 	team_name VARCHAR(64) NOT NULL,
 	no_of_players int NOT NULL,
 	team_logo varchar(256) NOT NULL
@@ -43,4 +66,23 @@ CREATE TABLE Team_Stats(
 	wins int NOT NULL,
 	no_games_played int NOT NULL
 );
+GO
+
+CREATE TABLE [dbo].[Position](
+	[position_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	CONSTRAINT [pk_position] PRIMARY KEY CLUSTERED 
+	(
+		[position_id] ASC
+	)
+);
+GO
+
+CREATE TABLE Player(player_id INT PRIMARY KEY,team_id INT NOT NULL,player_name VARCHAR(128) NOT NULL,height INT NOT NULL,photo VARCHAR(250) NOT NULL,injury_status INT NOT NULL,position_id INT NOT NULL,player_league_stats_id INT)
+GO
+CREATE TABLE Player_league_stats(player_league_stats_id INT PRIMARY KEY,league_id INT,goals INT NOT NULL,yellow_cards INT NOT NULL,red_cards INT NOT NULL,appearances INT NOT NULL)
+GO
+ALTER TABLE Player
+    ADD CONSTRAINT fk_player_stats FOREIGN KEY(player_league_stats_id)
+    REFERENCES Player_league_stats(player_league_stats_id)
 GO
