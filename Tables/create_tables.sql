@@ -8,37 +8,34 @@ GO
 USE SportStatsDB;
 GO
 
-CREATE TABLE [dbo].[Manager](
-    [manager_id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	[first_name][varchar](120) NOT NULL,
-	[last_name] [varchar](120) NOT NULL,
-    [date_of_birth] [date] NOT NULL,
-    [country_0f_birth] [varchar](120) NOT NULL,
+CREATE TABLE Manager(
+    manager_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	first_name varchar(120) NOT NULL,
+	last_name varchar(120) NOT NULL,
+    date_of_birth date NOT NULL,
+    country_0f_birth varchar(120) NOT NULL,
 );
 GO
--- ALTER TABLE dbo.Manager
--- ADD CONSTRAINT [pk_manager] PRIMARY KEY CLUSTERED ([manager_id]);
--- GO
 
-CREATE TABLE [dbo].[Country](
-	[country_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](100) NOT NULL,
-	[flag] [varchar](200) NULL,
-	CONSTRAINT [pk_country] PRIMARY KEY CLUSTERED 
+CREATE TABLE Country (
+	country_id [int] IDENTITY(1,1) NOT NULL,
+	name varchar(100) NOT NULL,
+	flag varchar(200) NULL,
+	CONSTRAINT pk_country PRIMARY KEY CLUSTERED 
 	(
-		[country_id] ASC
+		country_id ASC
 	)
 );
 GO
 
-CREATE TABLE [dbo].[League](
-	[league_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	[country_id] [int] FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
-	[logo] [varchar](200) NULL,
-	CONSTRAINT [pk_league] PRIMARY KEY CLUSTERED 
+CREATE TABLE League(
+	league_id int IDENTITY(1,1) NOT NULL,
+	name varchar(50) NOT NULL,
+	country_id int FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
+	logo varchar(200) NULL,
+	CONSTRAINT pk_league PRIMARY KEY CLUSTERED 
 	(
-		[league_id] ASC
+		league_id ASC
 	)
 );
 GO
@@ -68,12 +65,12 @@ CREATE TABLE Team_Stats(
 );
 GO
 
-CREATE TABLE [dbo].[Position](
-	[position_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
-	CONSTRAINT [pk_position] PRIMARY KEY CLUSTERED 
+CREATE TABLE Position(
+	position_id int IDENTITY(1,1) NOT NULL,
+	first_name varchar(50) NOT NULL,
+	CONSTRAINT pk_position PRIMARY KEY CLUSTERED 
 	(
-		[position_id] ASC
+		position_id ASC
 	)
 );
 GO
@@ -87,19 +84,19 @@ ALTER TABLE Player
     REFERENCES Player_league_stats(player_league_stats_id)
 GO
 
-CREATE TABLE [dbo].[Matches] (
-	[match_id] [int] NOT NULL,
-	[home_team_id] [int] FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
-	[away_team_id] [int] FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
-	[league_id] [int] NOT NULL,
-	[season] [int] NOT NULL CHECK (season > 1850 AND season < 2100),
-	[date_time] [datetime] NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'),
-	[stadium] [varchar](128),
-	[home_goals] [tinyint] NOT NULL,
-	[away_goals] [tinyint] NOT NULL,
-	[referee] [varchar](64),
-	[logo_url] [varchar](256),
-	CONSTRAINT [match_pk] PRIMARY KEY (match_id, home_team_id, away_team_id),
-	CONSTRAINT [match_u] UNIQUE (match_id),
+CREATE TABLE Matches (
+	match_id int NOT NULL,
+	home_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	away_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	league_id int NOT NULL,
+	season int NOT NULL CHECK (season > 1850 AND season < 2100),
+	date_time datetime NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'),
+	stadium varchar(128),
+	home_goals tinyint NOT NULL,
+	away_goals tinyint NOT NULL,
+	referee varchar(64),
+	logo_url varchar(256),
+	CONSTRAINT match_pk PRIMARY KEY (match_id, home_team_id, away_team_id),
+	CONSTRAINT match_u UNIQUE (match_id),
 );
 GO
