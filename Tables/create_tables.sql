@@ -22,7 +22,7 @@ GO
 
 CREATE TABLE [dbo].[Country](
 	[country_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](100) NOT NULL,
+	[country_name] [varchar](100) NOT NULL,
 	[flag] [varchar](200) NULL,
 	CONSTRAINT [pk_country] PRIMARY KEY CLUSTERED 
 	(
@@ -33,7 +33,7 @@ GO
 
 CREATE TABLE [dbo].[League](
 	[league_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
+	[league_name] [varchar](50) NOT NULL,
 	[country_id] [int] FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
 	[logo] [varchar](200) NULL,
 	CONSTRAINT [pk_league] PRIMARY KEY CLUSTERED 
@@ -70,7 +70,7 @@ GO
 
 CREATE TABLE [dbo].[Position](
 	[position_id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](50) NOT NULL,
+	[position_name] [varchar](50) NOT NULL,
 	CONSTRAINT [pk_position] PRIMARY KEY CLUSTERED 
 	(
 		[position_id] ASC
