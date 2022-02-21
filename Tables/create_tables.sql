@@ -10,8 +10,8 @@ GO
 
 CREATE TABLE [dbo].[Matches] (
 	[match_id] [int] NOT NULL,
-	[home_team_id] [int] FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
-	[away_team_id] [int] FOREIGN KEY REFERENCES Test_Team(team_id) NOT NULL,
+	[home_team_id] [int] FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	[away_team_id] [int] FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
 	[league_id] [int] NOT NULL,
 	[season] [int] NOT NULL CHECK (season > 1850 AND season < 2100),
 	[date_time] [datetime] NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'),
