@@ -5,7 +5,7 @@ DROP DATABASE SportStatsDB
 CREATE DATABASE SportStatsDB;
 GO
 
-USE SportStatsDB;
+USE TestDB;
 GO
 
 CREATE TABLE Manager(
@@ -40,11 +40,18 @@ CREATE TABLE League(
 );
 GO
 
+CREATE TABLE Stadium(
+    stadium_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	stadium_name varchar (120) NOT NULL,
+	stadium_capacity int NOT NULL,
+);
+GO
+
 CREATE TABLE Team(
     team_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	manager_id int FOREIGN KEY REFERENCES Manager(manager_id) NOT NULL,
 	league_id int FOREIGN KEY REFERENCES League(league_id) NOT NULL,
-	-- stadium_id int FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
+	stadium_id int FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
 	team_name VARCHAR(64) NOT NULL,
 	no_of_players int NOT NULL,
 	team_logo varchar(256) NOT NULL
