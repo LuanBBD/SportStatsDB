@@ -67,6 +67,7 @@ CREATE TABLE Team_Stats(
 	goal_diff int NOT NULL,
 	points int NOT NULL,
 	losses int NOT NULL,
+	draws int NOT NULL,
 	wins int NOT NULL,
 	no_games_played int NOT NULL
 );
