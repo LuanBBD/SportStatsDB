@@ -1,4 +1,4 @@
-CREATE FUNCTION GetPoints
+CREATE FUNCTION getPoints
 (
 @team_id int
 )
