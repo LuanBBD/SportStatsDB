@@ -1,11 +1,11 @@
 USE master
-IF EXISTS(select * from sys.databases where name='TestDB')
-DROP DATABASE TestDB
+IF EXISTS(select * from sys.databases where name='SportStatsDB')
+DROP DATABASE SportStatsDB
 
-CREATE DATABASE TestDB;
+CREATE DATABASE SportStatsDB;
 GO
 
-USE TestDB;
+USE SportStatsDB;
 GO
 
 CREATE TABLE Manager(
@@ -94,18 +94,18 @@ ALTER TABLE Player
 GO
 
 CREATE TABLE Matches (
-	match_id int NOT NULL,
+	match_id int PRIMARY KEY NOT NULL,
 	home_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
 	away_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
 	league_id int NOT NULL,
 	season int NOT NULL CHECK (season > 1850 AND season < 2100),
-	date_time datetime NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'),
+	match_date date NOT NULL CHECK (match_date > '1850-01-01' AND match_date < '2100-01-01'),
+	match_time time,
 	stadium varchar(128),
-	home_goals tinyint NOT NULL,
-	away_goals tinyint NOT NULL,
+	home_goals tinyint DEFAULT 0,
+	away_goals tinyint DEFAULT 0,
 	referee varchar(64),
-	logo_url varchar(256),
-	CONSTRAINT match_pk PRIMARY KEY (match_id, home_team_id, away_team_id),
-	CONSTRAINT match_u UNIQUE (match_id),
+	match_status varchar(32) NOT NULL,
+	CONSTRAINT distinct_teams CHECK (home_team_id <> away_team_id)
 );
 GO
