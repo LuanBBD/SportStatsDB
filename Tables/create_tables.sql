@@ -1,8 +1,8 @@
 USE master
-IF EXISTS(select * from sys.databases where name='SportStatsDB')
-DROP DATABASE SportStatsDB
+IF EXISTS(select * from sys.databases where name='TestDB')
+DROP DATABASE TestDB
 
-CREATE DATABASE SportStatsDB;
+CREATE DATABASE TestDB;
 GO
 
 USE TestDB;
@@ -13,7 +13,7 @@ CREATE TABLE Manager(
 	first_name varchar(120) NOT NULL,
 	last_name varchar(120) NOT NULL,
     date_of_birth date NOT NULL,
-    country_0f_birth varchar(120) NOT NULL,
+    country_of_birth varchar(120) NOT NULL,
 );
 GO
 
@@ -59,15 +59,16 @@ CREATE TABLE Team(
 GO
 
 CREATE TABLE Team_Stats(
-    team_league_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    team_stat_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	league_id int FOREIGN KEY REFERENCES League(league_id) NOT NULL,
 	league_pos int NOT NULL,
 	goals_against int NOT NULL,
 	goals_for int NOT NULL,
 	goal_diff int NOT NULL,
 	points int NOT NULL,
 	losses int NOT NULL,
-	draws int NOT NULL,
+	draws int NOT NULL,	
 	wins int NOT NULL,
 	no_games_played int NOT NULL
 );
