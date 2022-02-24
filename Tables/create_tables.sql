@@ -1,12 +1,8 @@
-USE master
-IF EXISTS(select * from sys.databases where name='SportStatsDB')
-DROP DATABASE SportStatsDB
+USE FinalTestDB;
 
-CREATE DATABASE SportStatsDB;
-GO
-
-USE TestDB;
-GO
+EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT ALL";
+EXEC sp_msforeachtable "DROP TABLE ?";
+EXEC sp_msforeachtable "DROP VIEW ?";
 
 CREATE TABLE Manager(
     manager_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
