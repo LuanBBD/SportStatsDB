@@ -69,7 +69,7 @@ CREATE TABLE Position(
 GO
 
 CREATE TABLE Player_League_Stats (
-	player_league_stats_id INT PRIMARY KEY NOT NULL,
+	player_league_stats_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	league_id INT FOREIGN KEY REFERENCES League(league_id) NOT NULL,
 	goals INT NOT NULL,
 	yellow_cards TINYINT NOT NULL,
