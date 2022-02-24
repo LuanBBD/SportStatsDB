@@ -9,11 +9,11 @@ USE TestDB;
 GO
 
 CREATE TABLE Manager(
-    manager_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	first_name varchar(120) NOT NULL,
-	last_name varchar(120) NOT NULL,
-    date_of_birth date NOT NULL,
-    country_0f_birth varchar(120) NOT NULL,
+    manager_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    first_name VARCHAR(120) NOT NULL,
+    last_name VARCHAR(120) NOT NULL,
+    date_of_birth DATE NOT NULL CHECK (date_of_birth < GETDATE()),
+    country_of_birth VARCHAR(64) NOT NULL,
 );
 GO
 
