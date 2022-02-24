@@ -1,8 +1,13 @@
-USE FinalTestDB;
+USE master;
 
-EXEC sp_msforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT ALL";
-EXEC sp_msforeachtable "DROP TABLE ?";
-EXEC sp_msforeachtable "DROP VIEW ?";
+IF EXISTS(select * from sys.databases where name='FinalTestDB')
+DROP DATABASE FinalTestDB
+
+CREATE DATABASE FinalTestDB;
+GO
+
+USE FinalTestDB;
+GO
 
 CREATE TABLE Manager(
     manager_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
