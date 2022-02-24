@@ -42,34 +42,30 @@ GO
 
 CREATE TABLE Stadium(
     stadium_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	stadium_name varchar (120) NOT NULL,
-	stadium_capacity int NOT NULL,
+    stadium_name varchar (120) NOT NULL,
+    stadium_capacity int NOT NULL,
 );
 GO
 
 CREATE TABLE Team(
-    team_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	manager_id int FOREIGN KEY REFERENCES Manager(manager_id) NOT NULL,
-	league_id int FOREIGN KEY REFERENCES League(league_id) NOT NULL,
-	stadium_id int FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
-	team_name VARCHAR(64) NOT NULL,
-	no_of_players int NOT NULL,
-	team_logo varchar(256) NOT NULL
+    team_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    manager_id INT FOREIGN KEY REFERENCES Manager(manager_id) NOT NULL,
+    league_id INT FOREIGN KEY REFERENCES League(league_id) NOT NULL,
+    stadium_id INT FOREIGN KEY REFERENCES Stadium(stadium_id) NOT NULL,
+    team_name VARCHAR(64) NOT NULL,
+    team_logo VARCHAR(256) NOT NULL
 );
 GO
 
 CREATE TABLE Team_Stats(
-    team_league_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
-	league_pos int NOT NULL,
-	goals_against int NOT NULL,
-	goals_for int NOT NULL,
-	goal_diff int NOT NULL,
-	points int NOT NULL,
-	losses int NOT NULL,
-	draws int NOT NULL,
-	wins int NOT NULL,
-	no_games_played int NOT NULL
+    team_stat_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    team_id INT FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+    league_id INT FOREIGN KEY REFERENCES League(league_id) NOT NULL,
+    goals_against INT DEFAULT 0,
+    goals_for INT DEFAULT 0,
+    losses TINYINT DEFAULT 0,
+    draws TINYINT DEFAULT 0,	
+    wins TINYINT DEFAULT 0,
 );
 GO
 
