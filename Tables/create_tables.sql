@@ -18,25 +18,17 @@ CREATE TABLE Manager(
 GO
 
 CREATE TABLE Country (
-	country_id [int] IDENTITY(1,1) NOT NULL,
-	country_name varchar(100) NOT NULL,
-	flag varchar(200) NULL,
-	CONSTRAINT pk_country PRIMARY KEY CLUSTERED 
-	(
-		country_id ASC
-	)
+    country_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    country_name VARCHAR(100) NOT NULL,
+    flag VARCHAR(200) NULL,
 );
 GO
 
 CREATE TABLE League(
-	league_id int IDENTITY(1,1) NOT NULL,
-	league_name varchar(50) NOT NULL,
-	country_id int FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
-	logo varchar(200) NULL,
-	CONSTRAINT pk_league PRIMARY KEY CLUSTERED 
-	(
-		league_id ASC
-	)
+    league_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    league_name VARCHAR(50) NOT NULL,
+    country_id INT FOREIGN KEY REFERENCES Country(country_id) NOT NULL,
+    logo VARCHAR(200) NULL
 );
 GO
 
@@ -70,12 +62,8 @@ CREATE TABLE Team_Stats(
 GO
 
 CREATE TABLE Position(
-	position_id int IDENTITY(1,1) NOT NULL,
-	position_name varchar(50) NOT NULL,
-	CONSTRAINT pk_position PRIMARY KEY CLUSTERED 
-	(
-		position_id ASC
-	)
+    position_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    position_name VARCHAR(50) NOT NULL,
 );
 GO
 
