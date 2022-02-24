@@ -12,3 +12,6 @@ Where dbo.League.league_name ='English Premier League'
 
 -- execute view 
 select* from TopEPLPlayer
+
+-- edit view
+Alter view
