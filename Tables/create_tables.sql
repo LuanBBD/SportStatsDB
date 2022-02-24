@@ -84,6 +84,7 @@ CREATE TABLE Player (
 	position_id INT FOREIGN KEY REFERENCES Position(position_id) NOT NULL,
 	first_name VARCHAR(128) NOT NULL,
 	last_name VARCHAR(128) NOT NULL,
+	date_of_birth DATE NOT NULL CHECK (date_of_birth < GETDATE()),
 	height INT NOT NULL,
 	photo VARCHAR(250) NOT NULL,
 	health_status BIT DEFAULT 0, -- 0: Fit, 1: Injured	
