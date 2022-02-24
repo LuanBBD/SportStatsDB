@@ -91,19 +91,20 @@ CREATE TABLE Player (
 );
 GO
 
-CREATE TABLE Matches (
-	match_id int NOT NULL,
-	home_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
-	away_team_id int FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
-	league_id int NOT NULL,
-	season int NOT NULL CHECK (season > 1850 AND season < 2100),
-	date_time datetime NOT NULL CHECK (date_time > '1850-01-01 00:00:00' AND date_time < '2100-01-01 00:00:00'),
-	stadium varchar(128),
-	home_goals tinyint NOT NULL,
-	away_goals tinyint NOT NULL,
-	referee varchar(64),
-	logo_url varchar(256),
-	CONSTRAINT match_pk PRIMARY KEY (match_id, home_team_id, away_team_id),
-	CONSTRAINT match_u UNIQUE (match_id),
+CREATE TABLE Match_Details (
+	match_id INT IDENTITY(1, 1) PRIMARY KEY NOT NULL,
+	home_team_id INT FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	away_team_id INT FOREIGN KEY REFERENCES Team(team_id) NOT NULL,
+	league_id INT FOREIGN KEY REFERENCES League(league_id) NOT NULL,
+	season INT NOT NULL CHECK (season > 1850 AND season < 2100),
+	match_date DATE NOT NULL CHECK (match_date > '1850-01-01' AND match_date < '2100-01-01'),
+	match_time TIME,
+	stadium VARCHAR(128),
+	home_goals TINYINT DEFAULT 0,
+	away_goals TINYINT DEFAULT 0,
+	referee VARCHAR(64),
+	match_status VARCHAR(32) NOT NULL,
+	CONSTRAINT distinct_teams CHECK (home_team_id <> away_team_id)
 );
 GO
+
