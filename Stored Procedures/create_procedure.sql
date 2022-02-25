@@ -40,3 +40,14 @@ AS
 	OFFSET dbo.getNumberOfGames(@team_id)-5 ROWS
 	FETCH NEXT 5 ROWS ONLY;
 GO
+
+CREATE PROCEDURE league_top_scorer
+@league_id int 
+AS 
+	SELECT Player.first_name, Player.last_name, Player_League_Stats.goals 
+	FROM (Player INNER JOIN Player_League_Stats ON Player.player_league_stats_id=Player_League_Stats.player_league_stats_id)
+	WHERE Player_League_Stats.league_id=@league_id
+	ORDER BY Player_League_Stats.goals DESC
+	OFFSET 0 ROWS
+	FETCH NEXT 5 ROWS ONLY;
+GO
