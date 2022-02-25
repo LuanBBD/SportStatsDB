@@ -1,12 +1,12 @@
 USE master;
 
-IF EXISTS(select * from sys.databases where name='FinalTestDB')
-DROP DATABASE FinalTestDB
+IF EXISTS(select * from sys.databases where name='SSProdDB')
+DROP DATABASE SSProdDB
 
-CREATE DATABASE FinalTestDB;
+CREATE DATABASE SSProdDB;
 GO
 
-USE FinalTestDB;
+USE SSProdDB;
 GO
 
 CREATE TABLE Manager(
